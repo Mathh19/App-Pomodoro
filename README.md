@@ -12,7 +12,7 @@ npm install
 ## Para abrir no seu navegador execute o comando
 
 ### `npm start`
-or
+ou
 ### `yarn  start`
 
 Abra no [http://localhost:3000](http://localhost:3000) para ver o resultado no seu navegador.
