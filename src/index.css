@@ -67,3 +67,13 @@ body {
 .pomodoro .details {
   margin: 20px 0;
 }
+
+.bar-times {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.bar-times button {
+  border-radius: 10px;
+}

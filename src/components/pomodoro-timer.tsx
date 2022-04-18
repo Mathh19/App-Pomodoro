@@ -24,6 +24,7 @@ export function PomodoroTimer(props: Props): JSX.Element {
   const [timeCouting, setTimeCounting] = useState(false);
   const [working, setWorking] = useState(false);
   const [resting, setResting] = useState(false);
+  const [clickedButton, setClickedButton] = useState(false);
   const [cyclesQtdManager, setCyclesQtdManager] = useState(
     new Array(props.cycles - 1).fill(true),
   );
@@ -78,6 +79,57 @@ export function PomodoroTimer(props: Props): JSX.Element {
     ],
   );
 
+  const displayMainTime = useCallback(() => {
+    let verifyDisplay = false;
+    if (working) {
+      verifyDisplay = window.confirm(
+        'O pomodoro está em execução, deseja mesmo mudar a exibição do pomodoro ? (Isso não irá resetar o tempo de horas trabalhadas)',
+      );
+      if (verifyDisplay === true) {
+        setClickedButton(true);
+        // setTimeCounting(false);
+        clickedButton;
+        setMainTime(props.pomodoroTime);
+      }
+    } else {
+      setMainTime(props.pomodoroTime);
+    }
+  }, [working, setClickedButton, setMainTime]);
+
+  const displayBreakTime = useCallback(() => {
+    let verifyDisplay = false;
+    if (working) {
+      verifyDisplay = window.confirm(
+        'O pomodoro está em execução, deseja mesmo mudar a exibição do pomodoro ? (Isso não irá resetar o tempo de horas trabalhadas)',
+      );
+      if (verifyDisplay === true) {
+        setClickedButton(true);
+        // setTimeCounting(false);
+        clickedButton;
+        setMainTime(props.shortsRestTime);
+      }
+    } else {
+      setMainTime(props.shortsRestTime);
+    }
+  }, [working, setClickedButton, setMainTime]);
+
+  const displayLongBreak = useCallback(() => {
+    let verifyDisplay = false;
+    if (working) {
+      verifyDisplay = window.confirm(
+        'O pomodoro está em execução, deseja mesmo mudar a exibição do pomodoro ? (Isso não irá resetar o tempo de horas trabalhadas)',
+      );
+      if (verifyDisplay === true) {
+        setClickedButton(true);
+        // setTimeCounting(false);
+        clickedButton;
+        setMainTime(props.longRestTime);
+      }
+    } else {
+      setMainTime(props.longRestTime);
+    }
+  }, [working, setClickedButton, setMainTime]);
+
   useEffect(() => {
     if (working) document.body.classList.add('working');
     if (resting) document.body.classList.remove('working');
@@ -111,6 +163,23 @@ export function PomodoroTimer(props: Props): JSX.Element {
   return (
     <div className="pomodoro">
       <h2>Você está: {working ? 'Trabalhando' : 'Descansando'}</h2>
+      <div className="bar-times">
+        <div>
+          <Button text="Pomodoro" onClick={() => displayMainTime()}></Button>
+        </div>
+        <div>
+          <Button
+            text="shortsRestTime"
+            onClick={() => displayBreakTime()}
+          ></Button>
+        </div>
+        <div>
+          <Button
+            text="longRestTime"
+            onClick={() => displayLongBreak()}
+          ></Button>
+        </div>
+      </div>
       <Timer mainTime={mainTime} />
       <div className="controls">
         <Button text="Work" onClick={() => configureWork()}></Button>
