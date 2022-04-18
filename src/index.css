@@ -59,9 +59,17 @@ body {
   margin: 20px auto;
 }
 
+.pomodoro button:hover {
+  background-color: #3bcaa6;
+}
+
 .working .pomodoro button {
   background-color: #EF5D50;
   color: #fff;
+}
+
+.working .pomodoro button:hover {
+  background-color: #ca4e43;
 }
 
 .pomodoro .details {

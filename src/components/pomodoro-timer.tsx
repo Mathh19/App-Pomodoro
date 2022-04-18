@@ -87,7 +87,7 @@ export function PomodoroTimer(props: Props): JSX.Element {
       );
       if (verifyDisplay === true) {
         setClickedButton(true);
-        // setTimeCounting(false);
+        setTimeCounting(false);
         clickedButton;
         setMainTime(props.pomodoroTime);
       }
@@ -104,7 +104,7 @@ export function PomodoroTimer(props: Props): JSX.Element {
       );
       if (verifyDisplay === true) {
         setClickedButton(true);
-        // setTimeCounting(false);
+        setTimeCounting(false);
         clickedButton;
         setMainTime(props.shortsRestTime);
       }
@@ -121,7 +121,7 @@ export function PomodoroTimer(props: Props): JSX.Element {
       );
       if (verifyDisplay === true) {
         setClickedButton(true);
-        // setTimeCounting(false);
+        setTimeCounting(false);
         clickedButton;
         setMainTime(props.longRestTime);
       }
@@ -168,14 +168,11 @@ export function PomodoroTimer(props: Props): JSX.Element {
           <Button text="Pomodoro" onClick={() => displayMainTime()}></Button>
         </div>
         <div>
-          <Button
-            text="shortsRestTime"
-            onClick={() => displayBreakTime()}
-          ></Button>
+          <Button text="Time rest" onClick={() => displayBreakTime()}></Button>
         </div>
         <div>
           <Button
-            text="longRestTime"
+            text="Time long rest"
             onClick={() => displayLongBreak()}
           ></Button>
         </div>
