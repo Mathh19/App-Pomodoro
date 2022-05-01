@@ -33,6 +33,11 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, .5);
 }
 
+.dark {
+  background-color: #191A19;
+  color: #fff;
+}
+
 .pomodoro h2 {
   font-size: 24px;
   text-align: center;

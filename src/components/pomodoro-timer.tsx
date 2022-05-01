@@ -3,6 +3,7 @@ import { useInterval } from '../hooks/use-interval';
 import { secondsToTime } from '../utils/seconds-to-time';
 import { Button } from './button';
 import { Timer } from './timer';
+import { ToggleSwitch } from './toggleSwitch-button';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const bellStart = require('../sounds/bell-start.mp3');
@@ -28,10 +29,10 @@ export function PomodoroTimer(props: Props): JSX.Element {
   const [cyclesQtdManager, setCyclesQtdManager] = useState(
     new Array(props.cycles - 1).fill(true),
   );
-
   const [completedCycles, setCompletedCycles] = useState(0);
   const [fullWorkingTime, setFullWorkingTime] = useState(0);
   const [numberOfPomodoros, setNumberOfPomodoros] = useState(0);
+  const [themeDark, setThemeDark] = useState(false);
 
   useInterval(
     () => {
@@ -130,6 +131,16 @@ export function PomodoroTimer(props: Props): JSX.Element {
     }
   }, [working, setClickedButton, setMainTime]);
 
+  const configureThemeDark = useCallback(() => {
+    const pomodoroDiv = document.body.querySelector('.pomodoro');
+    if (themeDark) {
+      pomodoroDiv?.classList.add('dark');
+    } else {
+      pomodoroDiv?.classList.toggle('dark');
+    }
+    console.log(themeDark);
+  }, [themeDark, setThemeDark]);
+
   useEffect(() => {
     if (working) document.body.classList.add('working');
     if (resting) document.body.classList.remove('working');
@@ -154,6 +165,7 @@ export function PomodoroTimer(props: Props): JSX.Element {
     cyclesQtdManager,
     numberOfPomodoros,
     completedCycles,
+    themeDark,
     configureRest,
     setCyclesQtdManager,
     configureWork,
@@ -162,6 +174,12 @@ export function PomodoroTimer(props: Props): JSX.Element {
 
   return (
     <div className="pomodoro">
+      <div>
+        <ToggleSwitch
+          className="switch"
+          onClick={() => configureThemeDark()}
+        ></ToggleSwitch>
+      </div>
       <h2>Você está: {working ? 'Trabalhando' : 'Descansando'}</h2>
       <div className="bar-times">
         <div>
