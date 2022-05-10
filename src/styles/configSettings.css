@@ -1,0 +1,64 @@
+.config-settings {
+  border-top: 1px solid rgba(182, 165, 166, 0.2);
+  border-bottom: 1px solid rgba(182, 165, 166, 0.2);
+  padding: 20px 0px;
+  min-height: 30px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.btn-box {
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px;
+}
+
+.btn-box button {
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: rgb(0 0 0 / 20%) 0px 2px 2px;
+  color: #ffffff;
+  opacity: 0.9;
+  font-size: 14px;
+  padding: 8px 12px;
+  min-width: 70px;
+  background-color: #222222;
+  border: 2px solid #9c9b9b;
+  display: inline-block;
+}
+
+.btn-box button:hover {
+  background-color: #3b3b3b;
+  transition: 300ms ease-in-out ;
+}
+
+.styles-box-inputs {
+  display: flex;
+  flex-direction: row;
+}
+
+.styles-box-inputs div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.styles-box-inputs input {
+  border-radius: 4px;
+  background-color: #efefef;
+  font-size: 16px;
+  padding: 10px;
+  box-shadow: none;
+  border: none;
+  color: #555555;
+  box-sizing: border-box;
+}

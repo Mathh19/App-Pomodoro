@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './styles/index.css';
 import './styles/toggleSwitch.css';
+import './styles/configurations.css';
+import './styles/configSettings.css';
 import App from './App';
 
 const root = ReactDOM.createRoot(

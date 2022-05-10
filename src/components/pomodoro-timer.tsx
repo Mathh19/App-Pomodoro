@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useInterval } from '../hooks/use-interval';
+import { PropsTimesPomodoro } from '../interfaces/props-times-pomodoro';
 import { secondsToTime } from '../utils/seconds-to-time';
 import { Button } from './button';
 import { Timer } from './timer';
@@ -13,14 +14,7 @@ const bellFinish = require('../sounds/bell-finish.mp3');
 const audioStartWorking = new Audio(bellStart);
 const audioStopWorking = new Audio(bellFinish);
 
-interface Props {
-  pomodoroTime: number;
-  shortsRestTime: number;
-  longRestTime: number;
-  cycles: number;
-}
-
-export function PomodoroTimer(props: Props): JSX.Element {
+export function PomodoroTimer(props: PropsTimesPomodoro): JSX.Element {
   const [mainTime, setMainTime] = useState(props.pomodoroTime);
   const [timeCouting, setTimeCounting] = useState(false);
   const [working, setWorking] = useState(false);
@@ -138,7 +132,6 @@ export function PomodoroTimer(props: Props): JSX.Element {
     } else {
       pomodoroDiv?.classList.toggle('dark');
     }
-    console.log(themeDark);
   }, [themeDark, setThemeDark]);
 
   useEffect(() => {
@@ -174,33 +167,53 @@ export function PomodoroTimer(props: Props): JSX.Element {
 
   return (
     <div className="pomodoro">
-      <div>
+      <div className="configurations">
         <ToggleSwitch
           className="switch"
           onClick={() => configureThemeDark()}
         ></ToggleSwitch>
+        <Button text="Settings" className="btn-setting"></Button>
       </div>
       <h2>Você está: {working ? 'Trabalhando' : 'Descansando'}</h2>
       <div className="bar-times">
         <div>
-          <Button text="Pomodoro" onClick={() => displayMainTime()}></Button>
+          <Button
+            text="Pomodoro"
+            onClick={() => displayMainTime()}
+            className="btn-default"
+          ></Button>
         </div>
         <div>
-          <Button text="Time rest" onClick={() => displayBreakTime()}></Button>
+          <Button
+            text="Time rest"
+            onClick={() => displayBreakTime()}
+            className="btn-default"
+          ></Button>
         </div>
         <div>
           <Button
             text="Time long rest"
             onClick={() => displayLongBreak()}
+            className="btn-default"
           ></Button>
         </div>
       </div>
       <Timer mainTime={mainTime} />
       <div className="controls">
-        <Button text="Work" onClick={() => configureWork()}></Button>
-        <Button text="Rest" onClick={() => configureRest(false)}></Button>
         <Button
-          className={!working && !resting ? 'hidden' : ''}
+          text="Work"
+          onClick={() => configureWork()}
+          className="btn-default"
+        ></Button>
+        <Button
+          text="Rest"
+          onClick={() => configureRest(false)}
+          className="btn-default"
+        ></Button>
+        <Button
+          className={
+            !working && !resting ? 'hidden btn-default' : ' btn-default'
+          }
           text={timeCouting ? 'Pause' : 'Play'}
           onClick={() => setTimeCounting(!timeCouting)}
         ></Button>

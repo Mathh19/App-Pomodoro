@@ -1,11 +1,7 @@
 import React from 'react';
+import { PropsToggle } from '../interfaces/props-toggle';
 
-interface Props {
-  onClick?: () => void;
-  className?: string;
-}
-
-export function ToggleSwitch(props: Props): JSX.Element {
+export function ToggleSwitch(props: PropsToggle): JSX.Element {
   return (
     <label className={props.className}>
       <input
