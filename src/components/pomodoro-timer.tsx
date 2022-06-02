@@ -3,13 +3,16 @@ import { useInterval } from '../hooks/use-interval';
 import { PropsTimesPomodoro } from '../interfaces/props-times-pomodoro';
 import { secondsToTime } from '../utils/seconds-to-time';
 import { Button } from './button';
+import { Modal } from './modal';
 import { Timer } from './timer';
-import { ToggleSwitch } from './toggleSwitch-button';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const bellStart = require('../sounds/bell-start.mp3');
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const bellFinish = require('../sounds/bell-finish.mp3');
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const logoSettings = require('../imgs/logo-settings.png');
 
 const audioStartWorking = new Audio(bellStart);
 const audioStopWorking = new Audio(bellFinish);
@@ -26,7 +29,7 @@ export function PomodoroTimer(props: PropsTimesPomodoro): JSX.Element {
   const [completedCycles, setCompletedCycles] = useState(0);
   const [fullWorkingTime, setFullWorkingTime] = useState(0);
   const [numberOfPomodoros, setNumberOfPomodoros] = useState(0);
-  const [themeDark, setThemeDark] = useState(false);
+  const [displaySettings, setDisplaySettings] = useState(false);
 
   useInterval(
     () => {
@@ -125,14 +128,19 @@ export function PomodoroTimer(props: PropsTimesPomodoro): JSX.Element {
     }
   }, [working, setClickedButton, setMainTime]);
 
-  const configureThemeDark = useCallback(() => {
-    const pomodoroDiv = document.body.querySelector('.pomodoro');
-    if (themeDark) {
-      pomodoroDiv?.classList.add('dark');
+  const openSettings = useCallback(() => {
+    const config = document.body.querySelector('.config-settings');
+    if (displaySettings) {
+      config?.classList.add('onSettings');
     } else {
-      pomodoroDiv?.classList.toggle('dark');
+      config?.classList.toggle('onSettings');
     }
-  }, [themeDark, setThemeDark]);
+  }, [displaySettings, setDisplaySettings]);
+
+  // const handleSubmit = (e: React.FormEvent<HTMLInputElement>) => {
+  //   e.preventDefault();
+  //   console.log('ok');
+  // };
 
   useEffect(() => {
     if (working) document.body.classList.add('working');
@@ -158,7 +166,6 @@ export function PomodoroTimer(props: PropsTimesPomodoro): JSX.Element {
     cyclesQtdManager,
     numberOfPomodoros,
     completedCycles,
-    themeDark,
     configureRest,
     setCyclesQtdManager,
     configureWork,
@@ -167,12 +174,12 @@ export function PomodoroTimer(props: PropsTimesPomodoro): JSX.Element {
 
   return (
     <div className="pomodoro">
+      <Modal />
       <div className="configurations">
-        <ToggleSwitch
-          className="switch"
-          onClick={() => configureThemeDark()}
-        ></ToggleSwitch>
-        <Button text="Settings" className="btn-setting"></Button>
+        <button className="btn-setting" onClick={() => openSettings()}>
+          <img src={logoSettings} alt="" className="logoSettings" />
+          Settings
+        </button>
       </div>
       <h2>Você está: {working ? 'Trabalhando' : 'Descansando'}</h2>
       <div className="bar-times">
