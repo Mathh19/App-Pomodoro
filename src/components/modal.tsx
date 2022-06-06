@@ -14,17 +14,17 @@ export function Modal(props: PropsTimesPomodoro): JSX.Element {
 
   const configureTheme = useCallback(() => {
     if (theme === 'light') {
-      window.localStorage.setItem('theme', 'dark');
+      localStorage.setItem('theme', 'dark');
       setTheme('dark');
     } else {
-      window.localStorage.setItem('theme', 'light');
+      localStorage.setItem('theme', 'light');
       setTheme('light');
     }
   }, [theme, setTheme]);
 
   useEffect(() => {
     const pomodoroDiv = document.body.querySelector('.pomodoro');
-    const localTheme = window.localStorage.getItem('theme');
+    const localTheme = localStorage.getItem('theme');
     localTheme && setTheme(localTheme);
 
     if (localTheme === 'dark') {
