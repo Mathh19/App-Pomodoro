@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useInterval } from '../hooks/use-interval';
-import { PropsTimesPomodoro } from '../interfaces/props-times-pomodoro';
 import { secondsToTime } from '../utils/seconds-to-time';
 import { Button } from './button';
 import { Modal } from './modal';
@@ -17,14 +16,19 @@ const logoSettings = require('../imgs/logo-settings.png');
 const audioStartWorking = new Audio(bellStart);
 const audioStopWorking = new Audio(bellFinish);
 
-export function PomodoroTimer(props: PropsTimesPomodoro): JSX.Element {
-  const [mainTime, setMainTime] = useState(props.pomodoroTime);
+export function PomodoroTimer(): JSX.Element {
+  const pomodoroTime = 1500;
+  const shortsRestTime = 300;
+  const longRestTime = 900;
+  const cycles = 4;
+
+  const [mainTime, setMainTime] = useState(pomodoroTime);
   const [timeCouting, setTimeCounting] = useState(false);
   const [working, setWorking] = useState(false);
   const [resting, setResting] = useState(false);
   const [clickedButton, setClickedButton] = useState(false);
   const [cyclesQtdManager, setCyclesQtdManager] = useState(
-    new Array(props.cycles - 1).fill(true),
+    new Array(cycles - 1).fill(true),
   );
   const [completedCycles, setCompletedCycles] = useState(0);
   const [fullWorkingTime, setFullWorkingTime] = useState(0);
@@ -43,15 +47,9 @@ export function PomodoroTimer(props: PropsTimesPomodoro): JSX.Element {
     setTimeCounting(true);
     setWorking(true);
     setResting(false);
-    setMainTime(props.pomodoroTime);
+    setMainTime(pomodoroTime);
     audioStartWorking.play();
-  }, [
-    setTimeCounting,
-    setWorking,
-    setResting,
-    setMainTime,
-    props.pomodoroTime,
-  ]);
+  }, [setTimeCounting, setWorking, setResting, setMainTime, pomodoroTime]);
 
   const configureRest = useCallback(
     (long: boolean) => {
@@ -60,9 +58,9 @@ export function PomodoroTimer(props: PropsTimesPomodoro): JSX.Element {
       setResting(true);
 
       if (long) {
-        setMainTime(props.longRestTime);
+        setMainTime(longRestTime);
       } else {
-        setMainTime(props.shortsRestTime);
+        setMainTime(shortsRestTime);
       }
 
       audioStopWorking.play();
@@ -72,8 +70,8 @@ export function PomodoroTimer(props: PropsTimesPomodoro): JSX.Element {
       setWorking,
       setResting,
       setMainTime,
-      props.longRestTime,
-      props.shortsRestTime,
+      longRestTime,
+      shortsRestTime,
     ],
   );
 
@@ -87,10 +85,10 @@ export function PomodoroTimer(props: PropsTimesPomodoro): JSX.Element {
         setClickedButton(true);
         setTimeCounting(false);
         clickedButton;
-        setMainTime(props.pomodoroTime);
+        setMainTime(pomodoroTime);
       }
     } else {
-      setMainTime(props.pomodoroTime);
+      setMainTime(pomodoroTime);
     }
   }, [working, setClickedButton, setMainTime]);
 
@@ -104,10 +102,10 @@ export function PomodoroTimer(props: PropsTimesPomodoro): JSX.Element {
         setClickedButton(true);
         setTimeCounting(false);
         clickedButton;
-        setMainTime(props.shortsRestTime);
+        setMainTime(shortsRestTime);
       }
     } else {
-      setMainTime(props.shortsRestTime);
+      setMainTime(shortsRestTime);
     }
   }, [working, setClickedButton, setMainTime]);
 
@@ -121,10 +119,10 @@ export function PomodoroTimer(props: PropsTimesPomodoro): JSX.Element {
         setClickedButton(true);
         setTimeCounting(false);
         clickedButton;
-        setMainTime(props.longRestTime);
+        setMainTime(longRestTime);
       }
     } else {
-      setMainTime(props.longRestTime);
+      setMainTime(longRestTime);
     }
   }, [working, setClickedButton, setMainTime]);
 
@@ -137,11 +135,6 @@ export function PomodoroTimer(props: PropsTimesPomodoro): JSX.Element {
     }
   }, [displaySettings, setDisplaySettings]);
 
-  // const handleSubmit = (e: React.FormEvent<HTMLInputElement>) => {
-  //   e.preventDefault();
-  //   console.log('ok');
-  // };
-
   useEffect(() => {
     if (working) document.body.classList.add('working');
     if (resting) document.body.classList.remove('working');
@@ -153,7 +146,7 @@ export function PomodoroTimer(props: PropsTimesPomodoro): JSX.Element {
       cyclesQtdManager.pop();
     } else if (working && cyclesQtdManager.length <= 0) {
       configureRest(true);
-      setCyclesQtdManager(new Array(props.cycles - 1).fill(true));
+      setCyclesQtdManager(new Array(cycles - 1).fill(true));
       setCompletedCycles(completedCycles + 1);
     }
 
@@ -169,12 +162,17 @@ export function PomodoroTimer(props: PropsTimesPomodoro): JSX.Element {
     configureRest,
     setCyclesQtdManager,
     configureWork,
-    props.cycles,
+    cycles,
   ]);
 
   return (
     <div className="pomodoro">
-      <Modal />
+      <Modal
+        pomodoroTime={pomodoroTime}
+        shortsRestTime={shortsRestTime}
+        longRestTime={longRestTime}
+        cycles={cycles}
+      />
       <div className="configurations">
         <button className="btn-setting" onClick={() => openSettings()}>
           <img src={logoSettings} alt="" className="logoSettings" />

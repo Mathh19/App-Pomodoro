@@ -1,10 +1,11 @@
 import React from 'react';
 import { PropsTimesPomodoro } from '../interfaces/props-times-pomodoro';
+import { minutesToSeconds } from '../utils/minutes-to-seconds';
 
 export function SettingsTimer(props: PropsTimesPomodoro): JSX.Element {
-  const pomodoroTime = props.pomodoroTime;
-  const shortRestTime = props.shortsRestTime;
-  const longRestTime = props.longRestTime;
+  const pomodoroTime = minutesToSeconds(props.pomodoroTime);
+  const shortRestTime = minutesToSeconds(props.shortsRestTime);
+  const longRestTime = minutesToSeconds(props.longRestTime);
   const cycles = props.cycles;
 
   return (

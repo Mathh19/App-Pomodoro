@@ -1,3 +1,3 @@
-export function minutesToSeconds(minutes: number) {
+export function minutesToSeconds(minutes: number): number {
   return minutes / 60;
 }
