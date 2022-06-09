@@ -9,6 +9,7 @@ export function ToggleSwitch(props: PropsToggle): JSX.Element {
           onClick={props.onClick}
           type="checkbox"
           className="switch-input"
+          checked={props.checked}
         ></input>
         <span className="slider round"></span>
       </label>

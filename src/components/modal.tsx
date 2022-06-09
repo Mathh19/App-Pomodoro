@@ -28,7 +28,6 @@ export function Modal(props: PropsTimesPomodoro): JSX.Element {
     localTheme && setTheme(localTheme);
 
     if (localTheme === 'dark') {
-      // const valueInput = document.body.querySelector('.switch-input');
       pomodoroDiv?.classList.add('dark');
     } else {
       pomodoroDiv?.classList.toggle('dark');
@@ -56,6 +55,7 @@ export function Modal(props: PropsTimesPomodoro): JSX.Element {
           <ToggleSwitch
             className="switch"
             onClick={() => configureTheme()}
+            checked={theme === 'dark' ? true : false}
           ></ToggleSwitch>
         </div>
         <div className="btn-box">
