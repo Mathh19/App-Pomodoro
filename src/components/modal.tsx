@@ -30,7 +30,7 @@ export function Modal(props: PropsTimesPomodoro): JSX.Element {
     if (localTheme === 'dark') {
       pomodoroDiv?.classList.add('dark');
     } else {
-      pomodoroDiv?.classList.toggle('dark');
+      pomodoroDiv?.classList.remove('dark');
     }
   });
 

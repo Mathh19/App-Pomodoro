@@ -176,7 +176,7 @@ export function PomodoroTimer(): JSX.Element {
       <div className="configurations">
         <button className="btn-setting" onClick={() => openSettings()}>
           <img src={logoSettings} alt="" className="logoSettings" />
-          Settings
+          Configuração
         </button>
       </div>
       <h2>Você está: {working ? 'Trabalhando' : 'Descansando'}</h2>
@@ -190,14 +190,14 @@ export function PomodoroTimer(): JSX.Element {
         </div>
         <div>
           <Button
-            text="Time rest"
+            text="Descanso"
             onClick={() => displayBreakTime()}
             className="btn-default"
           ></Button>
         </div>
         <div>
           <Button
-            text="Time long rest"
+            text="Descanso longo"
             onClick={() => displayLongBreak()}
             className="btn-default"
           ></Button>
@@ -211,7 +211,7 @@ export function PomodoroTimer(): JSX.Element {
           className="btn-default"
         ></Button>
         <Button
-          text="Rest"
+          text="Descanso"
           onClick={() => configureRest(false)}
           className="btn-default"
         ></Button>
@@ -219,7 +219,7 @@ export function PomodoroTimer(): JSX.Element {
           className={
             !working && !resting ? 'hidden btn-default' : ' btn-default'
           }
-          text={timeCouting ? 'Pause' : 'Play'}
+          text={timeCouting ? 'Stop' : 'Play'}
           onClick={() => setTimeCounting(!timeCouting)}
         ></Button>
       </div>
