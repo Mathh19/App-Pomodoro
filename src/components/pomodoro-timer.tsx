@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { useInterval } from '../hooks/use-interval';
 import { secondsToTime } from '../utils/seconds-to-time';
 import { Button } from './button';
-import { Modal } from './modal';
+import { Config } from './config-area';
 import { Timer } from './timer';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -167,7 +167,7 @@ export function PomodoroTimer(): JSX.Element {
 
   return (
     <div className="pomodoro">
-      <Modal
+      <Config
         pomodoroTime={pomodoroTime}
         shortsRestTime={shortsRestTime}
         longRestTime={longRestTime}
@@ -206,7 +206,7 @@ export function PomodoroTimer(): JSX.Element {
       <Timer mainTime={mainTime} />
       <div className="controls">
         <Button
-          text="Work"
+          text="Começar"
           onClick={() => configureWork()}
           className="btn-default"
         ></Button>

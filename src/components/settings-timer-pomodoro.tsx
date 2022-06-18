@@ -24,7 +24,7 @@ export function SettingsTimer(props: PropsTimesPomodoro): JSX.Element {
             />
           </div>
           <div>
-            <label>Time Rest:</label>
+            <label>Descanso:</label>
             <input
               type="number"
               min="1"
@@ -35,7 +35,7 @@ export function SettingsTimer(props: PropsTimesPomodoro): JSX.Element {
             />
           </div>
           <div>
-            <label>long Rest:</label>
+            <label>Descanso longo:</label>
             <input
               type="number"
               min="1"
@@ -46,7 +46,7 @@ export function SettingsTimer(props: PropsTimesPomodoro): JSX.Element {
             />
           </div>
           <div>
-            <label>Cycles:</label>
+            <label>Ciclos:</label>
             <input
               type="number"
               min="1"

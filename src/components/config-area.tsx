@@ -3,11 +3,11 @@ import { PropsTimesPomodoro } from '../interfaces/props-times-pomodoro';
 import { SettingsTimer } from './settings-timer-pomodoro';
 import { ToggleSwitch } from './toggleSwitch-button';
 
-export function Modal(props: PropsTimesPomodoro): JSX.Element {
+export function Config(props: PropsTimesPomodoro): JSX.Element {
   const [btnClose, setBtnClose] = useState(false);
   const [theme, setTheme] = useState('light');
 
-  const closeModal = useCallback(() => {
+  const closeConfig = useCallback(() => {
     const config = document.body.querySelector('.config-settings');
     config?.classList.toggle('onSettings');
   }, [btnClose, setBtnClose]);
@@ -40,7 +40,7 @@ export function Modal(props: PropsTimesPomodoro): JSX.Element {
   return (
     <div className="config-settings onSettings">
       <div className="area-button">
-        <button className="btn-close" onClick={() => closeModal()}>
+        <button className="btn-close" onClick={() => closeConfig()}>
           <img src={iconClose} alt="" />
         </button>
       </div>
@@ -51,7 +51,7 @@ export function Modal(props: PropsTimesPomodoro): JSX.Element {
           longRestTime={props.longRestTime}
           cycles={props.cycles}
         ></SettingsTimer>
-        <div className="config-modal">
+        <div className="config-area">
           <ToggleSwitch
             className="switch"
             onClick={() => configureTheme()}
@@ -59,7 +59,7 @@ export function Modal(props: PropsTimesPomodoro): JSX.Element {
           ></ToggleSwitch>
         </div>
         <div className="btn-box">
-          <button>Save</button>
+          <button>Salvar</button>
         </div>
       </form>
     </div>
